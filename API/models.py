@@ -23,7 +23,7 @@ class Event(models.Model):
             raise ValidationError("The event date cannot be in the past.")
     
     def save(self, *args, **kwargs):
-        self.clean()  # Call clean to validate date before saving
+        self.clean()  # Call clean to validate date before savings
         super(Event, self).save(*args, **kwargs)
     
     """Check if the event has reached its maximum capacity."""
@@ -41,20 +41,3 @@ class Event(models.Model):
 class Registration(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name= "event_register")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_register")
-    # is_waitlisted = models.BooleanField(default=False)
-    
-
-
-    # class Meta:
-    #     unique_together = ('event', 'user')
-
-
-# class Waitlist(models.Model):
-#     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-#     added_date = models.DateTimeField(auto_now_add=True)
-#     position = models.PositiveIntegerField(default=0)  # Optional: Store the position in the waitlist
-
-#     class Meta:
-#         ordering = ['added_date']

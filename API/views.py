@@ -110,7 +110,7 @@ class RegisterForEventView(generics.CreateAPIView):
         if event.attendees.filter(id=user.id).exists():
             return Response({'message': 'You are already registered for this event.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if event.no_of_attendees >= event.capacity:
+        if event.capacity <= 0 :
             event.waitlist.add(user)
             return Response({'message': 'Event is full. You have been added to the waitlist.'}, status=status.HTTP_200_OK)
 
@@ -123,6 +123,7 @@ class RegisterForEventView(generics.CreateAPIView):
 
         event.attendees.add(user)
         event.no_of_attendees += 1
+        event.capacity = event.capacity -1
         event.save()
 
         return Response({'message': 'Registration successful.', 'registration': RegistrationSerializer(registration).data}, status=status.HTTP_201_CREATED)
