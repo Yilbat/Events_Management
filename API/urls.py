@@ -7,7 +7,7 @@ urlpatterns = [
     path('users/<int:pk>/', views.UserDetailAPIView.as_view(), name='user-detail'),  # Retrieve, update, delete user
     
     # Event endpoints
-    path('events/', views.EventListAPIView.as_view(), name='event-list'),  # List and create events
+    path('', views.EventListAPIView.as_view(), name='event-list'),  # List and create events
     path('events/<int:pk>/', views.EventDetailAPIView.as_view(), name='event-detail'),  # Retrieve, update, delete event
     path('events/upcoming/', views.UpcomingEventListView.as_view(), name='upcoming-event-list'),
     
