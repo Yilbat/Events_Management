@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,3 +154,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
 
+# Define where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# URL to serve static files
+STATIC_URL = '/static/'
+
+# Additional places to look for static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
